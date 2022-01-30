@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.box{
+    margin-top: 20px;
+}
+.box_item{
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+}
+.box_label{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.box_item button{
+    width: 100px;
+    margin-left: 40px;
+    background-color: aqua;
+    padding: 10px 20px;
+}

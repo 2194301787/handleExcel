@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>生成excel</title>
+        <link href="/stylesheets/bootstrap.min.css" />
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+    </head>
+
+    <body>
+        <form action="/handle" onsubmit="return queren()" method="post">
+            <div class="box">
+                <div class="box_item">
+                    <div class="box_label">小区名</div>
+                    <div class="box_input">
+                        <input type="text" value="腾源名苑" name="location" placeholder="" />
+                    </div>
+                    <div class="box_label">年</div>
+                    <div class="box_input">
+                        <input id="year" type="text" name="nian" placeholder="" />
+                    </div>
+                    <div class="box_label">月</div>
+                    <div class="box_input">
+                        <input id="month" type="text" name="yue" placeholder="" />
+                    </div>
+                    <div class="box_label">日</div>
+                    <div class="box_input">
+                        <input id="day" type="text" name="ri" placeholder="" />
+                    </div>
+                </div>
+                <div class="box_item">
+                    <div class="box_label">房号</div>
+                    <div class="box_input">
+                        <input type="text" name="fanghao" placeholder="" />
+                    </div>
+                    <div class="box_label">收款人</div>
+                    <div class="box_input">
+                        <input type="text" value="吴浩" name="username" placeholder="" />
+                    </div>
+                    <div class="box_label">服务电话</div>
+                    <div class="box_input">
+                        <input type="text" value="5222289" name="phone" placeholder="" />
+                    </div>
+                    <div class="box_label">收款单位</div>
+                    <div class="box_input">
+                        <input type="text" value="联发物业" name="unit" placeholder="" />
+                    </div>
+                </div>
+                <div id="render_item"></div>
+                <!-- <div class="box_item">
+                    <div class="box_label">管理费</div>
+                    <div class="box_input">
+                        <input type="text" name="guanli" placeholder="" />
+                    </div>
+                    <div class="box_label">费用(运算公式或者运算结果)</div>
+                    <div class="box_input">
+                        <input type="text" name="guanlifei" placeholder="" />
+                    </div>
+                </div> -->
+                <div class="box_item">
+                    <div class="box_label">打多少折(8.5) 不填不打折</div>
+                    <div class="box_input">
+                        <input type="text" name="dazhe" placeholder="" />
+                    </div>
+                </div>
+                <div class="box_item">
+                    <div class="box_label">生成文件名</div>
+                    <div class="box_input">
+                        <input type="text" value="收据单" required name="filename" placeholder="" />
+                    </div>
+                </div>
+                <div class="box_item">
+                    <button type="submit">提交</button>
+                </div>
+            </div>
+        </form>
+        <script src="/javascripts/jquery.js"></script>
+        <script src="/javascripts/bootstrap.min.js"></script>
+        <script>
+            function queren() {
+                return confirm("确认提交")
+            }
+            var year = new Date().getFullYear().toString()
+            $("#year").attr({ value: year.substring(year.length - 2) })
+            var month = new Date().getMonth() + 1
+            $("#month").attr({ value: month })
+            var day = new Date().getDate()
+            $("#day").attr({ value: day })
+
+            var renderList = [
+                {
+                    _label: "管理费",
+                    _value: undefined,
+                },
+                {
+                    _label: "电梯分摊费",
+                    _value: undefined,
+                },
+                {
+                    _label: "电梯运行保养费",
+                    _value: undefined,
+                },
+                {
+                    _label: "低层分摊费",
+                    _value: undefined,
+                },
+                {
+                    _label: "斗门区发改委规定垃圾费",
+                    _value: undefined,
+                },
+                {
+                    _label: "绿化浇水分摊",
+                    _value: undefined,
+                },
+                {
+                    _label: "共用设施维修",
+                    _value: undefined,
+                },
+                {
+                    _label: "停车费",
+                    _value: undefined,
+                },
+            ]
+            var htmlStr = ""
+            renderList.forEach(function (item, index) {
+                htmlStr +=
+                    '<div class="box_item">' +
+                    '<div class="box_label">' +
+                    item._label +
+                    "</div>" +
+                    '<div class="box_input">' +
+                    '<input type="text" name="_label' +
+                    index +
+                    '" ' +
+                    "/>" +
+                    "</div>" +
+                    ' <div class="box_label">费用(运算公式或者运算结果)</div>' +
+                    '<div class="box_input">' +
+                    '<input type="text" name="_value' +
+                    index +
+                    '" ' +
+                    "/>" +
+                    "</div>" +
+                    "</div>"
+            })
+            $("#render_item").html(htmlStr)
+        </script>
+    </body>
+</html>
